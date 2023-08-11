@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symmetrical Component Calculator</title>
+    <link rel="stylesheet" href="E:\CSS-MY WEB\recap of html\index.css">
+    <script>
+        function calculateCurrentSymmetricalComponents() {
+            var a_real = parseFloat(document.getElementById('currentA_real').value);
+            var a_imag = parseFloat(document.getElementById('currentA_imag').value);
+            var b_real = parseFloat(document.getElementById('currentB_real').value);
+            var b_imag = parseFloat(document.getElementById('currentB_imag').value);
+            var c_real = parseFloat(document.getElementById('currentC_real').value);
+            var c_imag = parseFloat(document.getElementById('currentC_imag').value);
+
+            // Current Symmetrical Components
+            var positiveSeq_real = (a_real - (0.5) * b_real - 0.866* b_imag - 0.5 * c_real +0.866 * c_imag) / 3;
+            var positiveSeq_imag = (a_imag + 0.866 * b_real - 0.5 * b_imag - 0.866* c_real - 0.5* c_imag) / 3;
+            var negativeSeq_real = (a_real - 0.5* b_real + 0.866* b_imag - 0.5 * c_real - 0.866 * c_imag) / 3;
+            var negativeSeq_imag = (a_imag - 0.866 * b_real - 0.5* b_imag + 0.866 * c_real - 0.5 * c_imag) / 3;
+            var zeroSeq_real = (a_real + b_real + c_real) / 3;
+            var zeroSeq_imag = (a_imag + b_imag + c_imag) / 3;
+
+            // Display results
+            document.getElementById('resultCurrentPositiveSeq').innerHTML = "Positive Sequence: " + positiveSeq_real.toFixed(2) + " + " + positiveSeq_imag.toFixed(2) + "i";
+            document.getElementById('resultCurrentNegativeSeq').innerHTML = "Negative Sequence: " + negativeSeq_real.toFixed(2) + " + " + negativeSeq_imag.toFixed(2) + "i";
+            document.getElementById('resultCurrentZeroSeq').innerHTML = "Zero Sequence: " + zeroSeq_real.toFixed(2) + " + " + zeroSeq_imag.toFixed(2) + "i";
+        }
+
+        function calculateVoltageSymmetricalComponents() {
+            var a_real = parseFloat(document.getElementById('voltageA_real').value);
+            var a_imag = parseFloat(document.getElementById('voltageA_imag').value);
+            var b_real = parseFloat(document.getElementById('voltageB_real').value);
+            var b_imag = parseFloat(document.getElementById('voltageB_imag').value);
+            var c_real = parseFloat(document.getElementById('voltageC_real').value);
+            var c_imag = parseFloat(document.getElementById('voltageC_imag').value);
+
+            // Voltage Symmetrical Components
+            var positiveSeq_real = (a_real + Math.cos(240 * Math.PI / 180) * b_real - Math.sin(240 * Math.PI / 180) * b_imag + Math.cos(120 * Math.PI / 180) * c_real - Math.sin(120 * Math.PI / 180) * c_imag) / 3;
+            var positiveSeq_imag = (a_imag + Math.sin(240 * Math.PI / 180) * b_real + Math.cos(240 * Math.PI / 180) * b_imag + Math.sin(120 * Math.PI / 180) * c_real + Math.cos(120 * Math.PI / 180) * c_imag) / 3;
+            var negativeSeq_real = (a_real + Math.cos(120 * Math.PI / 180) * b_real - Math.sin(120 * Math.PI / 180) * b_imag + Math.cos(240 * Math.PI / 180) * c_real - Math.sin(240 * Math.PI / 180) * c_imag) / 3;
+            var negativeSeq_imag = (a_imag + Math.sin(120 * Math.PI / 180) * b_real + Math.cos(120 * Math.PI / 180) * b_imag + Math.sin(240 * Math.PI / 180) * c_real + Math.cos(240 * Math.PI / 180) * c_imag) / 3;
+            var zeroSeq_real = (a_real + b_real + c_real) / 3;
+            var zeroSeq_imag = (a_imag + b_imag + c_imag) / 3;
+
+            // Display results
+            document.getElementById('resultVoltagePositiveSeq').innerHTML = "Positive Sequence: " + positiveSeq_real.toFixed(2) + " + " + positiveSeq_imag.toFixed(2) + "i";
+            document.getElementById('resultVoltageNegativeSeq').innerHTML = "Negative Sequence: " + negativeSeq_real.toFixed(2) + " + " + negativeSeq_imag.toFixed(2) + "i";
+            document.getElementById('resultVoltageZeroSeq').innerHTML = "Zero Sequence: " + zeroSeq_real.toFixed(2) + " + " + zeroSeq_imag.toFixed(2) + "i";
+        }
+    </script>
+</head>
+<body>
+    <h1>Symmetrical Component Calculator</h1>
+
+    <h2>Calculate Current Symmetrical Components:</h2>
+    <label for="currentA_real">Phase A (Real Part):</label>
+    <input type="number" id="currentA_real"><br>
+    <label for="currentA_imag">Phase A (Imaginary Part):</label>
+    <input type="number" id="currentA_imag"><br>
+
+    <label for="currentB_real">Phase B (Real Part):</label>
+    <input type="number" id="currentB_real"><br>
+    <label for="currentB_imag">Phase B (Imaginary Part):</label>
+    <input type="number" id="currentB_imag"><br>
+
+    <label for="currentC_real">Phase C (Real Part):</label>
+    <input type="number" id="currentC_real"><br>
+    <label for="currentC_imag">Phase C (Imaginary Part):</label>
+    <input type="number" id="currentC_imag"><br>
+
+    <button onclick="calculateCurrentSymmetricalComponents()">Calculate Current Symmetrical Components</button>
+
+    <h2>Results for Current Symmetrical Components(w.r.t A)</h2>
+    <p id="resultCurrentPositiveSeq"></p>
+    <p id="resultCurrentNegativeSeq"></p>
+    <p id="resultCurrentZeroSeq"></p>
+
+    <h2>Calculate Voltage Symmetrical Components:</h2>
+    <label for="voltageA_real">Phase A (Real Part):</label>
+    <input type="number" id="voltageA_real"><br>
+    <label for="voltageA_imag">Phase A (Imaginary Part):</label>
+    <input type="number" id="voltageA_imag"><br>
+
+    <label for="voltageB_real">Phase B (Real Part):</label>
+    <input type="number" id="voltageB_real"><br>
+    <label for="voltageB_imag">Phase B (Imaginary Part):</label>
+    <input type="number" id="voltageB_imag"><br>
+
+    <label for="voltageC_real">Phase C (Real Part):</label>
+    <input type="number" id="voltageC_real"><br>
+    <label for="voltageC_imag">Phase C (Imaginary Part):</label>
+    <input type="number" id="voltageC_imag"><br>
+
+    <button onclick="calculateVoltageSymmetricalComponents()">Calculate Voltage Symmetrical Components</button>
+
+    <h2>Results for Voltage Symmetrical Components(w.r.t A)</h2>
+    <p id="resultVoltagePositiveSeq"></p>
+    <p id="resultVoltageNegativeSeq"></p>
+    <p id="resultVoltageZeroSeq"></p>
+</body>
+</html>
